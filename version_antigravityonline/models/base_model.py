@@ -16,7 +16,7 @@ class BaseModel:
         if key not in st.session_state:
             try:
                 conn = BaseModel._get_connection()
-                df = conn.read(worksheet=key, ttl=0)
+                df = conn.read(worksheet=key, ttl="10m")
                 if df is None or df.empty:
                     df = pd.DataFrame()
                 if True:
@@ -132,6 +132,7 @@ class BaseModel:
                 df = st.session_state[key]
                 conn = BaseModel._get_connection()
                 conn.update(worksheet=key, data=df)
+                st.cache_data.clear()
                 return True
             except Exception as e:
                 st.error(f"Erreur lors de la sauvegarde sur Google Sheets pour '{key}': {e}")
