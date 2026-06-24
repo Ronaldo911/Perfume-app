@@ -7,22 +7,19 @@ from utils.helpers import clean_numeric, new_id
 
 class BaseModel:
     @staticmethod
-    @staticmethod
     def _get_connection():
         from streamlit_gsheets import GSheetsConnection
         return st.connection("gsheets", type=GSheetsConnection)
 
     @staticmethod
     def load_df(key):
-        """Load data from Google Sheets to session state if not already loaded"""
         if key not in st.session_state:
             try:
                 conn = BaseModel._get_connection()
                 df = conn.read(worksheet=key, ttl=0)
                 if df is None or df.empty:
                     df = pd.DataFrame()
-                    # It's fine if the dataframe is empty, we just need it not to be None.
-                    # We will apply columns cleaning next.
+                if True:
                     # Ensure numeric columns are clean and string columns are type-safe (not float64 NaN)
                     if key == "inventory":
                         for col in ["Quantite_ML", "CUMP", "Valeur_Stock_Totale"]:
