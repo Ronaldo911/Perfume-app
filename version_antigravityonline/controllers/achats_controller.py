@@ -57,7 +57,7 @@ class AchatsController:
             m_type="ACHAT",
             ref_id=achat_id,
             article=nom,
-            qte=quantite_ml,
+            qte=quantite,
             valeur=prix_total,
             stock_avant=stock_before,
             stock_apres=stock_after
