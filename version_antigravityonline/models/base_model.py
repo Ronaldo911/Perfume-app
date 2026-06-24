@@ -23,101 +23,127 @@ class BaseModel:
                     # Ensure numeric columns are clean and string columns are type-safe (not float64 NaN)
                     if key == "inventory":
                         for col in ["Quantite_ML", "CUMP", "Valeur_Stock_Totale"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                         for col in ["ID", "Nom", "Categorie"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                     elif key == "purchases":
                         for col in ["Quantite_ML", "Prix_Total", "CUMP_Achat"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                         for col in ["ID", "Date", "Categorie", "Nom", "Qualite", "Commentaire", "Image_Path"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                     elif key == "production":
                         for col in ["Quantite_Base_ML", "Quantite_Alcool_ML", "Quantite_Flacons",
                                     "Cout_Base", "Cout_Alcool", "Cout_Flacon", "Cout_Total", "Cout_Unitaire"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                         for col in ["ID", "Date", "Nom_Base", "Qualite_Base", "Nom_Flacon", "Taille_Flacon", "Nom_Parfum", "Nom_Alcool", "Type_Production"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                     elif key == "ventes":
                         for col in ["Quantite", "Prix_Unitaire", "Remise", "CA_Avant", "CA_Reel",
                                     "Montant_Recu", "Cout_Revient", "Marge"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                         for col in ["ID", "Date", "Client", "Type_Vente", "Nom_Parfum", "Qualite", "Taille", "Type_Remise"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                     elif key == "shop_config":
                         for col in ["Boutique_Nom", "Logo_Path", "Theme_Couleur", "Date_Creation"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                     elif key == "categories":
                         for col in ["ID", "Nom", "Couleur", "Date_Ajout"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                     elif key == "mouvements":
                         for col in ["Quantite", "Valeur", "Stock_Avant", "Stock_Apres"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                         for col in ["ID", "Date", "Type", "Reference", "Article"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                     elif key == "tailles":
                         for col in ["ID", "Taille"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                     elif key == "prix_vente":
                         for col in ["ID", "Taille"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                         if "Prix_TND" in df.columns:
                             df["Prix_TND"] = df["Prix_TND"].apply(clean_numeric)
                     elif key == "offres":
                         for col in ["ID", "Date", "Client", "Type_Vente", "Nom_Parfum", "Qualite", "Taille"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                         for col in ["Quantite", "Cout_Revient"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                     elif key == "pertes":
                         for col in ["ID", "Date", "Article", "Raison"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                         for col in ["Quantite", "Cout"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                     elif key == "credits_history":
                         for col in ["ID", "Date_Vente", "Client", "Nom_Parfum", "Taille"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                         for col in ["Montant_Dette", "Montant_Paye", "Reste"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                     elif key == "deletions_purchases":
                         for col in ["ID", "Date_Suppression", "Date_Achat", "Categorie", "Nom"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                         for col in ["Quantite_ML", "Prix_Total"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                     elif key == "deletions_production":
                         for col in ["ID", "Date_Suppression", "Date_Production", "Nom_Parfum"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                         for col in ["Quantite_Flacons", "Cout_Total"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                     elif key == "deletions_ventes":
                         for col in ["ID", "Date_Suppression", "Date_Vente", "Nom_Parfum"]:
-                            if col in df.columns:
-                                df[col] = df[col].fillna("").astype(str)
+                            if col not in df.columns:
+                                df[col] = ""
+                            df[col] = df[col].fillna("").astype(str)
                         for col in ["Quantite", "CA_Reel"]:
-                            if col in df.columns:
-                                df[col] = df[col].apply(clean_numeric)
+                            if col not in df.columns:
+                                df[col] = 0.0
+                            df[col] = df[col].apply(clean_numeric)
                     st.session_state[key] = df
             except Exception as e:
                 st.error(f"Erreur Google Sheets pour '{key}': {e}")
